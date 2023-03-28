@@ -10,7 +10,7 @@
 }
 
 .hidden {
-  animation: shake 20s ease-in;
+  animation: shake 5000s ease-in;
   opacity: 70%;
 }
 
