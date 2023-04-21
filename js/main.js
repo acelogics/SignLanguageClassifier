@@ -1,3 +1,4 @@
+// Define variables and assign initial values
 var identity = 0;
 var classes = []; // list of classes
 // classes = [ {id:1 , name : "Hello" , count : 0}]
@@ -7,11 +8,13 @@ var uploadedModel = false;
 console.log("Training Page: For training your custom sign langauge model");
 
 
+// Define an async function that will be used to start the training process
 const start = async () => {
     const trainingCards = document.getElementById("training-cards")
     const predictions = document.getElementById("predictions")
     const confidence = document.getElementById("confidence")
 
+    // Define async functions to create the KNN classifier, MobileNet model, and webcam input
     const createKNNClassifier = async () => {
         console.log('Loading KNN Classifier');
         return await knnClassifier.create();
@@ -26,16 +29,19 @@ const start = async () => {
         return await tf.data.webcam(webcamElement);
     };
 
+    // Load the MobileNet model, create a KNN classifier, and create a webcam input
     const mobilenetModel = await createMobileNetModel();
     const knnClassifierModel = await createKNNClassifier();
     const webcamInput = await createWebcamInput();
     var preloader = document.getElementById("loading");
 
+    // Hide the loading spinner once the models and input are loaded
     function preLoader() {
         preloader.style.display = 'none';
     };
     preLoader()
 
+    // Define a function to add a new class to the KNN classifier
     const addClass = () => {
         // const inputClassName = document.getElementById("inputClassName").value
 
@@ -67,6 +73,7 @@ const start = async () => {
 
     };
 
+    // Save the KNN classifier as a JSON file
     const saveClassifier = (classifierModel) => {
         let datasets = classifierModel.getClassifierDataset();
         let datasetObject = {};
